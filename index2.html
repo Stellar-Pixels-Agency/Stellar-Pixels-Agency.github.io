@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NovaStudio — Creative Agency</title>
+  <meta name="description" content="An original, modern agency template with hero, services, portfolio, testimonials, pricing, and contact sections." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0d12;          /* Base background */
+      --panel: #0f1219;       /* Raised surface */
+      --text: #e7e8ea;        /* Primary text */
+      --muted: #a7acb8;       /* Secondary text */
+      --brand: #7c5cff;       /* Accent */
+      --brand-2:#4fd1c5;      /* Secondary accent */
+      --line: #1a1f2b;        /* Hairline borders */
+      --ok: #22c55e;          /* Success */
+      --warn: #f59e0b;        /* Warning */
+      --err: #ef4444;         /* Error */
+      --radius-xl: 20px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-1: 0 8px 24px rgba(0,0,0,.35);
+      --shadow-2: 0 30px 80px rgba(0,0,0,.45);
+      --maxw: 1200px;
+    }
+    *, *::before, *::after{ box-sizing:border-box }
+    html, body{ height:100% }
+    body{
+      margin:0; background: radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,.15), transparent),
+                                radial-gradient(900px 500px at 10% -20%, rgba(79,209,197,.12), transparent),
+                                var(--bg);
+      color:var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.5; letter-spacing:.01em;
+    }
+    img{ max-width:100%; display:block }
+    a{ color:inherit; text-decoration:none }
+    .container{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px }
+
+    /* Header */
+    .header{
+      position:sticky; top:0; z-index:50; backdrop-filter: saturate(140%) blur(10px);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; height:72px }
+    .brand{ display:flex; gap:12px; align-items:center; font-weight:800; letter-spacing:.02em }
+    .logo{
+      width:38px; height:38px; border-radius:12px; background: conic-gradient(from 210deg, var(--brand), var(--brand-2));
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.08), 0 6px 16px rgba(124,92,255,.25);
+    }
+    .nav-links{ display:flex; gap:22px }
+    .nav-links a{ color:var(--muted); font-weight:600 }
+    .nav-links a:hover{ color:var(--text) }
+    .cta{ display:flex; gap:10px; align-items:center }
+    .btn{ padding:10px 16px; border-radius:12px; font-weight:700; border:1px solid var(--line); background:#0c0f16 }
+    .btn.primary{ background:linear-gradient(135deg, var(--brand), var(--brand-2)); border-color:transparent; color:#0b0d12 }
+    .btn.primary:hover{ filter:brightness(1.05) }
+
+    /* Hero */
+    .hero{ padding:92px 0 72px; position:relative }
+    .super{ display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-weight:600; background:rgba(255,255,255,.02) }
+    .super .dot{ width:8px; height:8px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 6px rgba(34,197,94,.12) }
+    .h1{ font-family:"Plus Jakarta Sans", Inter, sans-serif; font-weight:900; line-height:1.06; letter-spacing:-.02em; font-size: clamp(32px, 6vw, 64px); margin:16px 0 }
+    .lead{ max-width: 70ch; color:var(--muted); font-size: clamp(16px, 2.4vw, 18px) }
+    .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:24px }
+
+    .hero-grid{ margin-top:48px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px }
+    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.03), transparent), var(--panel); border:1px solid var(--line); border-radius:var(--radius-xl); padding:22px; box-shadow:var(--shadow-1) }
+    .panel h3{ margin:0 0 8px; font-size:18px }
+    .stat{ display:flex; align-items:end; justify-content:space-between; margin-top:8px }
+    .stat .value{ font-size:40px; font-weight:900; letter-spacing:-.02em }
+    .thumb{ aspect-ratio:16/9; border-radius:14px; background:linear-gradient(135deg, #1a2030, #101522); border:1px dashed #2a3246; display:grid; place-items:center; color:#8892a6; font-weight:700 }
+    .tag{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted); font-weight:600 }
+
+    /* Logos / trust */
+    .trust{ padding:40px 0 }
+    .marquee{ display:flex; overflow:hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .marquee-inner{ display:flex; gap:42px; padding:18px 0; animation: slide 28s linear infinite }
+    .logo-pill{ padding:8px 14px; border-radius:999px; border:1px solid var(--line); background:#0b0f19; color:#95a0b8; font-weight:700; white-space:nowrap }
+    @keyframes slide { from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+
+    /* Sections */
+    section{ padding:72px 0 }
+    .section-head{ display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:24px }
+    .eyebrow{ color:var(--brand-2); font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:12px }
+    .title{ font-family:"Plus Jakarta Sans"; font-weight:800; letter-spacing:-.01em; font-size: clamp(24px, 4vw, 40px) }
+    .desc{ color:var(--muted); max-width:70ch }
+
+    /* Services */
+    .grid{ display:grid; gap:18px }
+    .grid.services{ grid-template-columns: repeat(12, 1fr) }
+    .service{ grid-column: span 4; background:linear-gradient(180deg, rgba(255,255,255,.02), transparent), #0e121a; border:1px solid var(--line); border-radius:16px; padding:18px; transition: transform .2s ease, border-color .2s ease }
+    .service:hover{ transform: translateY(-2px); border-color:#253049 }
+    .service h3{ margin:8px 0 6px; font-size:18px }
+    .service p{ margin:0; color:var(--muted) }
+
+    /* Work */
+    .grid.work{ grid-template-columns: repeat(12, 1fr) }
+    .project{ grid-column: span 6; display:flex; flex-direction:column; gap:12px; background:linear-gradient(180deg, rgba(255,255,255,.02), transparent), #0d1118; border:1px solid var(--line); border-radius:18px; padding:16px }
+    .project .thumb{ aspect-ratio: 16/9 }
+    .meta{ display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px }
+
+    /* Process */
+    .process{ display:grid; grid-template-columns: repeat(4, 1fr); gap:16px }
+    .step{ background:#0d121a; border:1px solid var(--line); border-radius:16px; padding:18px }
+    .step .num{ width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font-weight:800; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#0b0d12; margin-bottom:8px }
+
+    /* Testimonials */
+    .testi{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px }
+    .quote{ background:#0e1219; border:1px solid var(--line); border-radius:16px; padding:18px }
+    .quote p{ margin:0 0 10px }
+    .person{ display:flex; align-items:center; gap:10px; color:var(--muted) }
+    .avatar{ width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg, #243149, #131a26) }
+
+    /* Pricing */
+    .plans{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px }
+    .plan{ background:#0f141d; border:1px solid var(--line); border-radius:18px; padding:22px; position:relative }
+    .plan.best::after{ content:"Popular"; position:absolute; top:14px; right:14px; font-size:12px; font-weight:800; color:#0b0d12; background:linear-gradient(135deg, var(--brand), var(--brand-2)); padding:6px 10px; border-radius:999px }
+    .price{ font-size:42px; font-weight:900; letter-spacing:-.02em; margin:4px 0 10px }
+    .features{ display:grid; gap:8px; color:var(--muted) }
+    .features li{ list-style:none; display:flex; gap:10px }
+
+    /* FAQ (details/summary = no JS) */
+    .faq{ display:grid; grid-template-columns:1fr 1fr; gap:16px }
+    details{ background:#0e1219; border:1px solid var(--line); border-radius:14px; padding:14px 16px }
+    summary{ cursor:pointer; font-weight:700 }
+    details[open]{ border-color:#263349 }
+
+    /* Contact */
+    .contact{ display:grid; grid-template-columns: 1.1fr .9fr; gap:22px }
+    .form{ background:#0f141d; border:1px solid var(--line); border-radius:18px; padding:18px }
+    label{ display:block; font-weight:700; margin:10px 0 6px }
+    input, textarea{ width:100%; padding:12px 14px; background:#0b0f16; border:1px solid #1b2230; color:var(--text); border-radius:12px }
+    textarea{ min-height:120px; resize:vertical }
+    .aside{ background:linear-gradient(180deg, rgba(124,92,255,.08), transparent), #0e131d; border:1px solid var(--line); border-radius:18px; padding:18px }
+
+    /* Footer */
+    .footer{ padding:38px 0; border-top:1px solid var(--line); color:var(--muted) }
+
+    /* Responsive */
+    @media (max-width: 1000px){
+      .hero-grid, .contact{ grid-template-columns: 1fr }
+      .process{ grid-template-columns: repeat(2, 1fr) }
+      .testi{ grid-template-columns: 1fr 1fr }
+      .plans{ grid-template-columns: 1fr 1fr }
+      .grid.services, .grid.work{ grid-template-columns: repeat(6, 1fr) }
+      .service{ grid-column: span 3 }
+      .project{ grid-column: span 6 }
+    }
+    @media (max-width: 680px){
+      .nav-links{ display:none }
+      .testi{ grid-template-columns: 1fr }
+      .plans{ grid-template-columns: 1fr }
+      .faq{ grid-template-columns: 1fr }
+      .grid.services{ grid-template-columns: 1fr 1fr }
+      .service{ grid-column: auto }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav" role="navigation" aria-label="Main">
+      <a class="brand" href="#home" aria-label="Agency home">
+        <div class="logo" aria-hidden="true"></div>
+        <span>NovaStudio</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="cta">
+        <a class="btn" href="#pricing">View Plans</a>
+        <a class="btn primary" href="#contact">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home" class="hero">
+    <div class="container">
+      <span class="super"><span class="dot"></span>Bookings open for Q4</span>
+      <h1 class="h1">We design & build fast, beautiful websites that win customers.</h1>
+      <p class="lead">An original template you can customize freely—structured for agencies and freelancers. Replace the placeholder images and copy with your own brand in minutes.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#contact">Start a Project</a>
+        <a class="btn" href="#work">See Our Work</a>
+      </div>
+
+      <div class="hero-grid">
+        <div class="panel">
+          <h3>Featured Case Study</h3>
+          <div class="thumb">16:9 Placeholder Image</div>
+          <div class="meta">
+            <span class="tag">Performance + SEO</span>
+            <span class="tag">Next.js</span>
+          </div>
+          <div class="stat">
+            <div>
+              <div class="value">+128%</div>
+              <div class="muted">Lead conversions</div>
+            </div>
+            <a class="btn" href="#work">Read more</a>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Delivery Snapshot</h3>
+          <ul class="features">
+            <li>✔ 2–4 week sprints</li>
+            <li>✔ Accessibility-first (WCAG AA)</li>
+            <li>✔ Analytics & on-page SEO</li>
+            <li>✔ Visual CMS & handoff docs</li>
+          </ul>
+          <div style="height:14px"></div>
+          <div class="stat">
+            <div>
+              <div class="value">96</div>
+              <div class="muted">Lighthouse Performance</div>
+            </div>
+            <div>
+              <div class="value"><span style="font-size:24px">Core Web Vitals</span></div>
+              <div class="muted">Good on 95% pages</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Trust logos marquee (placeholder pills) -->
+  <div class="trust">
+    <div class="marquee">
+      <div class="marquee-inner" aria-hidden="true">
+        <span class="logo-pill">Acme Co.</span>
+        <span class="logo-pill">Northwind</span>
+        <span class="logo-pill">Globex</span>
+        <span class="logo-pill">Initech</span>
+        <span class="logo-pill">Umbrella</span>
+        <span class="logo-pill">Stark</span>
+        <span class="logo-pill">Wayne</span>
+        <span class="logo-pill">Wonka</span>
+        <!-- duplicate for seamless loop -->
+        <span class="logo-pill">Acme Co.</span>
+        <span class="logo-pill">Northwind</span>
+        <span class="logo-pill">Globex</span>
+        <span class="logo-pill">Initech</span>
+        <span class="logo-pill">Umbrella</span>
+        <span class="logo-pill">Stark</span>
+        <span class="logo-pill">Wayne</span>
+        <span class="logo-pill">Wonka</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">What we do</div>
+          <h2 class="title">Strategy, design, and development—end to end.</h2>
+        </div>
+        <p class="desc">Swap titles and copy for your real offerings. Each card links to a deeper page if you need one.
+        </p>
+      </div>
+      <div class="grid services">
+        <article class="service" aria-label="Brand & Identity">
+          <div class="tag">Brand & Identity</div>
+          <h3>Make it memorable</h3>
+          <p>Design systems, typography, color, and guidelines for consistent storytelling.</p>
+        </article>
+        <article class="service" aria-label="Web Design">
+          <div class="tag">Web Design</div>
+          <h3>Delightful UX/UI</h3>
+          <p>High‑fidelity responsive design with attention to accessibility and motion.</p>
+        </article>
+        <article class="service" aria-label="Web Development">
+          <div class="tag">Web Development</div>
+          <h3>Modern, fast builds</h3>
+          <p>Production‑ready sites using your preferred stack. CMS optional.</p>
+        </article>
+        <article class="service" aria-label="SEO & Analytics">
+          <div class="tag">SEO & Analytics</div>
+          <h3>Be discoverable</h3>
+          <p>On‑page SEO, structured data, and privacy‑friendly analytics baked in.</p>
+        </article>
+        <article class="service" aria-label="Content Production">
+          <div class="tag">Content</div>
+          <h3>Words that convert</h3>
+          <p>Messaging frameworks, landing copy, and case studies.</p>
+        </article>
+        <article class="service" aria-label="Support & Care">
+          <div class="tag">Care</div>
+          <h3>Ongoing support</h3>
+          <p>Retainers for site improvements, A/B tests, and iteration.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Selected work</div>
+          <h2 class="title">Recent projects</h2>
+        </div>
+        <p class="desc">Replace these tiles with your portfolio items. The thumbnails are placeholders.
+        </p>
+      </div>
+      <div class="grid work">
+        <article class="project">
+          <div class="thumb">Project image</div>
+          <h3>LaunchPad SaaS</h3>
+          <div class="meta"><span>Brand, Web</span><span>•</span><span>2025</span></div>
+          <p class="desc">New site and marketing visuals for a developer tools platform.</p>
+        </article>
+        <article class="project">
+          <div class="thumb">Project image</div>
+          <h3>Echo Health</h3>
+          <div class="meta"><span>Design, Dev</span><span>•</span><span>2025</span></div>
+          <p class="desc">Accessible redesign for a healthcare startup improving patient intake.</p>
+        </article>
+        <article class="project">
+          <div class="thumb">Project image</div>
+          <h3>Orbit Finance</h3>
+          <div class="meta"><span>Web, SEO</span><span>•</span><span>2024</span></div>
+          <p class="desc">High‑performance landing site with schema and analytics.</p>
+        </article>
+        <article class="project">
+          <div class="thumb">Project image</div>
+          <h3>GreenHive</h3>
+          <div class="meta"><span>Brand, Web</span><span>•</span><span>2024</span></div>
+          <p class="desc">Sustainable brand identity and conversion‑focused pages.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">How we work</div>
+          <h2 class="title">A simple, collaborative process</h2>
+        </div>
+        <p class="desc">Scope clearly, ship quickly, and iterate with real feedback.
+        </p>
+      </div>
+      <div class="process">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Discover</h3>
+          <p>Goals, audience, and success metrics. Technical constraints identified.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Design</h3>
+          <p>Wireframes → prototypes → final visuals with accessibility checks.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Build</h3>
+          <p>Component‑driven development, performance budget, and QA.</p>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <h3>Launch & Learn</h3>
+          <p>Analytics baseline, experiments, and a care plan if needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Testimonials</div>
+          <h2 class="title">What clients say</h2>
+        </div>
+        <p class="desc">Short social proof—swap names and quotes for real ones.</p>
+      </div>
+      <div class="testi">
+        <figure class="quote">
+          <p>“They delivered faster than any team we’ve worked with, and the site flies.”</p>
+          <figcaption class="person"><span class="avatar"></span> Sam R., CTO @ LaunchPad</figcaption>
+        </figure>
+        <figure class="quote">
+          <p>“Beautiful work and measurable results—our inbound leads doubled.”</p>
+          <figcaption class="person"><span class="avatar"></span> Dana W., COO @ Echo Health</figcaption>
+        </figure>
+        <figure class="quote">
+          <p>“Clear process, great communication, and thoughtful details throughout.”</p>
+          <figcaption class="person"><span class="avatar"></span> Alex P., Founder @ Orbit</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Pricing</div>
+          <h2 class="title">Pick a plan or request custom</h2>
+        </div>
+        <p class="desc">Transparent tiers. Replace copy with your real inclusions and terms.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <h3>Starter</h3>
+          <div class="price">$2,500</div>
+          <ul class="features">
+            <li>• One‑page site</li>
+            <li>• Basic SEO</li>
+            <li>• 1 round of revisions</li>
+          </ul>
+          <div style="height:12px"></div>
+          <a class="btn" href="#contact">Choose Starter</a>
+        </div>
+        <div class="plan best">
+          <h3>Growth</h3>
+          <div class="price">$6,500</div>
+          <ul class="features">
+            <li>• 5–7 pages</li>
+            <li>• CMS integration</li>
+            <li>• On‑page SEO + analytics</li>
+            <li>• 2 rounds of revisions</li>
+          </ul>
+          <div style="height:12px"></div>
+          <a class="btn primary" href="#contact">Choose Growth</a>
+        </div>
+        <div class="plan">
+          <h3>Custom</h3>
+          <div class="price">$—</div>
+          <ul class="features">
+            <li>• Complex features</li>
+            <li>• Advanced animations</li>
+            <li>• Multilingual & a11y audits</li>
+          </ul>
+          <div style="height:12px"></div>
+          <a class="btn" href="#contact">Request Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">FAQ</div>
+          <h2 class="title">Common questions</h2>
+        </div>
+        <p class="desc">Use native <code>&lt;details&gt;</code> for a no‑JS accordion.</p>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>How long does a project take?</summary>
+          <p>Most projects ship within 2–6 weeks depending on scope and approvals.</p>
+        </details>
+        <details>
+          <summary>Which tools do you use?</summary>
+          <p>Figma for design, modern web stacks for development, and your preferred CMS.</p>
+        </details>
+        <details>
+          <summary>Do you offer ongoing help?</summary>
+          <p>Yes—through a monthly care plan for updates, optimizations, and experiments.</p>
+        </details>
+        <details>
+          <summary>Is this template free to use?</summary>
+          <p>Yes. Customize it freely with your own brand, copy, and assets.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container contact">
+      <form class="form" aria-label="Contact form" onsubmit="return false;">
+        <h2 class="title" style="margin:0 0 6px">Let’s talk</h2>
+        <p class="desc">Tell us about your project and we’ll get back within 1–2 business days.</p>
+        <label for="name">Name</label>
+        <input id="name" name="name" placeholder="Jane Doe" required />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="jane@company.com" required />
+        <label for="budget">Budget</label>
+        <input id="budget" name="budget" placeholder="$5k–$15k" />
+        <label for="message">Project details</label>
+        <textarea id="message" name="message" placeholder="What are you building? Goals, timeline, must‑haves…"></textarea>
+        <div style="height:12px"></div>
+        <button class="btn primary" type="submit">Send Message</button>
+      </form>
+      <aside class="aside">
+        <h3>Contact info</h3>
+        <p class="desc">Swap with real details or remove this column.</p>
+        <p><strong>Email:</strong> hello@novastudio.dev</p>
+        <p><strong>Location:</strong> Remote • USA/EU hours</p>
+        <div class="thumb" style="margin-top:12px">Map / office photo</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <div style="display:flex; align-items:center; gap:12px">
+        <div class="logo" aria-hidden="true"></div>
+        <span>© <span id="year"></span> NovaStudio</span>
+      </div>
+      <div style="display:flex; gap:14px">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tiny progressive enhancement: current year in footer.
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
